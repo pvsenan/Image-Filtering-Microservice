@@ -43,12 +43,12 @@ import { pathToFileURL } from 'url';
       res.status(403).send("Bad request. Missing query param");
     }
     const filteredImagePath = await filterImageFromURL(image_url);
-    res.status(200).sendFile(filteredImagePath);
-  
     let imagesToDelete = new Array();
     imagesToDelete.push(filteredImagePath);
-    console.log(imagesToDelete);
-    await deleteLocalFiles(imagesToDelete);
+    res.status(200).sendFile(filteredImagePath);
+    res.on('finisi',function(){
+      deleteLocalFiles(imagesToDelete);
+    });
   });
 
   // Root Endpoint
