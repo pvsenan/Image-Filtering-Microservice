@@ -46,7 +46,7 @@ import { pathToFileURL } from 'url';
     let imagesToDelete = new Array();
     imagesToDelete.push(filteredImagePath);
     res.status(200).sendFile(filteredImagePath);
-    res.on('finisi',function(){
+    res.on('finish',function(){
       deleteLocalFiles(imagesToDelete);
     });
   });
